@@ -1,0 +1,16 @@
+{% extends 'base.html'%}
+
+{%block app_content%}
+
+{% if not session['user_id']%}
+
+        <h1 class="cover-heading">Buokie</h1>
+        <p class="lead">Welcome to the Buokie project, a book review web page, developed in Python and Flask, using Postgres database, and no ORM .... just pure raw SQL commands :)</p>
+{% else %}
+        <h1 class="cover-heading">Buokie</h1>
+        <p class="lead">Welcome to the Buokie project, a book review web page, developed in Python and Flask, using Postgres database, and no ORM .... just pure raw SQL commands :)</p>
+        <p class="lead">Hi {{session['user_name']}}, now that you're logged in my friend, feel free to search whatever book you like, and please give your review ..... We also have the API
+            functionality, just input <code class="highlighter-rouge">/api/&lt;isbn&gt;</code>
+        </p>
+{% endif %}
+{%endblock%}

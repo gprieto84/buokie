@@ -1,0 +1,61 @@
+{% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{%block app_content%}
+<h1>Book</h1>
+
+    {% if book %}
+    <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">ISBN</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Year</th>
+                <th scope="col">GoodReads Ratings Count/th>
+                <th scope="col">GoodReads Avg Rating</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">{{book.isbn}}</th>
+                <td>{{book.title}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.year}}</td>
+                <td>{{work_ratings_count}}</td>
+                <td>{{avg_rating}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <h3>Give your book feedback</h3>
+        <div class="row">
+                <div class="col-md-4">
+                    {{ wtf.quick_form(form) }}
+                </div>
+        </div>
+        <br>
+        {% if reviews %}
+        <h4>Reviews</h4>
+        <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Star Rating</th>
+                    <th scope="col">Review</th>
+                    <th scope="col">Date</th>
+                </tr>
+                </thead>
+                <tbody>
+            {% for review in reviews %}
+                    <tr>
+                        <td>{{review.username}}</td>
+                        <td>{{review.star}}</td>
+                        <td>{{review.review}}</td>
+                        <td>{{review.created_on}}</td>
+                    </tr>
+            {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
+{%endblock%}
