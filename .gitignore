@@ -94,3 +94,4 @@ env/
 key.key
 backupII.gz
 .vscode/
+Backup.sql
