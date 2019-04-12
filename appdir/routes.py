@@ -60,17 +60,17 @@ def book(book_id):
         book = db.execute("SELECT * FROM books WHERE id=:id",{"id":book_id}).fetchone()
         try:
             res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": "P3rKT05i2aMQ36S6NTNlZg", "isbns": book.isbn})
-            work_rating_count = res.json()['books'][0]['work_ratings_count']
+            work_ratings_count = res.json()['books'][0]['work_ratings_count']
             avg_rating = res.json()['books'][0]['average_rating']
         except requests.exceptions.Timeout as e:
             avg_rating = 'Time out from Goodreads'
-            work_rating_count = 'Time out from Goodreads'
+            work_ratings_count = 'Time out from Goodreads'
         except requests.exceptions.TooManyRedirects as e:
             avg_rating = 'Too many redirects from GoodReads'
-            work_rating_count = 'Time out from Goodreads'
+            work_ratings_count = 'Time out from Goodreads'
         except requests.exceptions.RequestException as e:
             avg_rating = 'General Exception from GoodReads'
-            work_rating_count = 'Time out from Goodreads'
+            work_ratings_count = 'Time out from Goodreads'
 
         form = ReviewForm()
         if form.validate_on_submit():
@@ -87,7 +87,7 @@ def book(book_id):
                             "FROM reviews INNER JOIN books ON (reviews.book_id = books.id) " + 
                             "INNER JOIN users ON (reviews.user_id = users.id) "+
                             "WHERE book_id = :book_id",{"book_id":book_id}).fetchall()
-        return render_template('book.html', book=book, avg_rating=avg_rating, work_rating_count=work_rating_count, reviews=reviews, form = form)
+        return render_template('book.html', book=book, avg_rating=avg_rating, work_ratings_count=work_ratings_count, reviews=reviews, form = form)
 
 @app.route("/api/<isbn>")
 def book_api(isbn):
