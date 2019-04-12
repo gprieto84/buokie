@@ -32,7 +32,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Sign in')
 
 class SearchForm(FlaskForm):
-    search = StringField('Username', validators=[DataRequired('Please enter some text'),Length(min=2,max=60)])
+    search = StringField('', validators=[DataRequired('Please enter some text'),Length(min=2,max=60)])
     submit = SubmitField('Search')
 
 class ReviewForm(FlaskForm):
