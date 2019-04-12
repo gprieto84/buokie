@@ -83,7 +83,7 @@ def book(book_id):
             else:
                 flash("You have already submitted a review for this book.")
 
-        reviews = db.execute("SELECT review, star, title, author, username, to_char(timestamp, 'HH24:MI:SS') AS created_on  "+
+        reviews = db.execute("SELECT review, star, title, author, username, to_char(timestamp, 'YYYY-MM-DD HH24:MI') AS created_on  "+
                             "FROM reviews INNER JOIN books ON (reviews.book_id = books.id) " + 
                             "INNER JOIN users ON (reviews.user_id = users.id) "+
                             "WHERE book_id = :book_id",{"book_id":book_id}).fetchall()
