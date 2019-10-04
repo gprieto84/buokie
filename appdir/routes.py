@@ -19,7 +19,7 @@ def register():
             ,{"username":form.username.data, "password_hash":generate_password_hash(form.password.data)
             ,"email":form.email.data,"first_name":form.first_name.data,"last_name":form.last_name.data})
         db.commit()
-        flash("User created")
+        flash("User created ..")
         return redirect(url_for("login"))
     return render_template('register.html', form=form)
 
